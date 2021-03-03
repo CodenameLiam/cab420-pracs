@@ -1,0 +1,25 @@
+Attribute,Attribute Description
+Site ID,Is the ID for the direction of travel at the location
+Parent Site ID,Is the ID for the location
+Parent Site Name,Is the Name for the location
+Site Name,Is the name for the direction of travel at the location
+Type,Is either Manual or Automatic counting site
+Latitude,Is the Latitude in geographic coordinate system (WGS84)
+Longitude,Is the Longitude in geographic coordinate system (WGS84)
+Legacy,Is yes if this site was surveyed when initial surveys were conducted in 2004
+Start_Date,Is the the year the site was first surveyed
+2004,Is 1 if the survey was conducted in this year
+2005,Is 1 if the survey was conducted in this year
+2006,Is 1 if the survey was conducted in this year
+2007,Is 1 if the survey was conducted in this year
+2008,Is 1 if the survey was conducted in this year
+2009,Is 1 if the survey was conducted in this year
+2010,Is 1 if the survey was conducted in this year
+2011,Is 1 if the survey was conducted in this year
+2012,Is 1 if the survey was conducted in this year
+2013,Is 1 if the survey was conducted in this year
+2014,Is 1 if the survey was conducted in this year
+2015,Is 1 if the survey was conducted in this year
+2016,Is 1 if the survey was conducted in this year
+2017,Is 1 if the survey was conducted in this year
+2018,Is 1 if the survey was conducted in this year
