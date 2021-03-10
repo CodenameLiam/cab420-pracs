@@ -37,8 +37,6 @@ except:
 # Convert strings to datetime
 data["Date"] = pd.to_datetime(data["Date"])
 
-print(data.tail())
-
 # Create training, validation and testing sets
 train = data[data.Date < datetime(year=2017, month=1, day=1)]
 validation = data[((data.Date >= datetime(year=2017, month=1, day=1)) &
