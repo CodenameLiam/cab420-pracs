@@ -92,6 +92,13 @@ sm.qqplot(model_1_fit.resid, ax=ax, line='s')
 plt.title('Q-Q Plot for Linear Regression Model 1')
 # plt.show()
 
+# Residual plot
+fig, ax = plt.subplots(figsize=(8,6))
+plt.scatter(pred, Y_val - pred)
+plt.title('Residual plot for unregularised model')
+plt.xlabel('Predicted Quantity')
+plt.ylabel('Residuals')
+
 
 # -------------------------------------------------------------------------------------------
 # Model 2 - Higher terms
@@ -125,10 +132,13 @@ model_2 = sm.OLS(Y_train, X_train_complex)
 # Fit the model
 model_2_fit = model_2.fit()
 pred = model_2_fit.predict(X_val_complex)
+pred_test = model_2_fit.predict(X_test_complex)
+pred_train = model_2_fit.predict(X_train_complex)
 
 # Print results
-print('\n\nModel 2 RMSE = {}'.format(np.sqrt(mean_squared_error(Y_val, model_2_fit.predict(X_val_complex)))))
-# print('Model 2 RMSE = {}'.format(np.sqrt(mean_squared_error(Y_val, model_2_fit.predict(X_test_complex)))))
+print('\n\nModel 2 RMSE Test = {}'.format(np.sqrt(mean_squared_error(Y_test, pred_test))))
+print('\nModel 2 RMSE Train = {}'.format(np.sqrt(mean_squared_error(Y_train, pred_train))))
+print('\nModel 2 RMSE Validation = {}'.format(np.sqrt(mean_squared_error(Y_val, pred))))
 print(model_2_fit.summary())
 # print(model_2_fit.params)
 
@@ -137,6 +147,7 @@ fig, ax = plt.subplots(figsize=(8,6))
 sm.qqplot(model_2_fit.resid, ax=ax, line='s')
 plt.title('Q-Q Plot for Linear Regression Model 2')
 # plt.show()
+
 
 
 # -------------------------------------------------------------------------------------------
@@ -164,3 +175,5 @@ pred = model_4_fit.predict(X_val_complex)
 print('\n\nModel 4 L2 RMSE = {}'.format(np.sqrt(mean_squared_error(Y_val, pred))))
 # print(model_3_fit.summary())
 # print(model_4_fit.params)
+
+plt.show()
