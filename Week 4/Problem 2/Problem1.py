@@ -6,13 +6,17 @@ import tensorflow as tf
 
 from tensorflow import keras
 from tensorflow.keras import layers
-from tensorboard import notebook
+from tensorboard import notebook, program
 
 import sklearn
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 tf.keras.backend.clear_session()
+
+
+
+# from Tensorboard import TensorboardSupervisor
 
 # Double checking versions
 print(sklearn.__version__)
@@ -119,17 +123,24 @@ def CNN_model():
     model_cnn = keras.Model(inputs=inputs, outputs=outputs, name='fashion_mnist_cnn_model')
     model_cnn.summary()
 
-    keras.utils.plot_model(model_cnn, show_shapes=True)
+    # keras.utils.plot_model(model_cnn, show_shapes=True)
+
+
+    tensorboard_callback = tf.keras.callbacks.TensorBoard('logs\\1', histogram_freq=1)
+    # tb_sup = TensorboardSupervisor(logdir)
 
     model_cnn.compile(loss=keras.losses.SparseCategoricalCrossentropy(from_logits=False),
                     optimizer=keras.optimizers.RMSprop(),
                     metrics=['accuracy'])
     history = model_cnn.fit(x_train, y_train,
                             batch_size=64,
-                            epochs=20,
-                            validation_split=0.2)
+                            epochs=10,
+                            validation_split=0.2,
+                             callbacks=[tensorboard_callback])
 
     eval_model(model_cnn, x_test, y_test)
+
+    # tb_sup.finalize()
 
 def advanced_CNN_model():
     (x_train, y_train), (x_test, y_test) = keras.datasets.fashion_mnist.load_data()
@@ -177,24 +188,26 @@ def advanced_CNN_model():
     model_cnn = keras.Model(inputs=inputs, outputs=outputs, name='fashion_mnist_cnn_model')
     model_cnn.summary()
 
-    keras.utils.plot_model(model_cnn, show_shapes=True)
+    # keras.utils.plot_model(model_cnn, show_shapes=True)
 
     logdir = os.path.join("logs", datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
+    # tb_sup = TensorboardSupervisor(logdir)
 
     model_cnn.compile(loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                 optimizer=keras.optimizers.RMSprop(),
                 metrics=['accuracy'])
     history = model_cnn.fit(x_train, y_train,
                             batch_size=64,
-                            epochs=20,
+                            epochs=5,
                             validation_split=0.2,
                             callbacks=[tensorboard_callback])
 
     eval_model(model_cnn, x_test, y_test)
 
 
+
 # dense_model()
-# CNN_model()
-advanced_CNN_model()
+CNN_model()
+# advanced_CNN_model()
 plt.show()
